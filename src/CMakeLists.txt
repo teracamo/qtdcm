@@ -134,6 +134,22 @@ set(${PROJECT_NAME}_LIBRARIES
   ${ITKIOPhilipsREC_LIBRARIES}
 )
 
+
+set(
+	CMAKE_ARCHIVE_OUTPUT_DIRECTORY
+	${CMAKE_BINARY_DIR}/lib
+)
+
+set(
+	CMAKE_LIBRARY_OUTPUT_DIRECTORY
+	${CMAKE_BINARY_DIR}/lib
+)
+set(
+	CMAKE_RUNTIME_OUTPUT_DIRECTORY 
+	${CMAKE_BINARY_DIR}/bin
+)
+
+
 include_directories(
   ${CMAKE_BINARY_DIR} 
   ${${PROJECT_NAME}_SOURCE_DIR} 
@@ -144,6 +160,11 @@ include_directories(
 
 add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}_SOURCES} ${${PROJECT_NAME}_HEADERS})
 target_link_libraries(${PROJECT_NAME} ${${PROJECT_NAME}_LIBRARIES})
+target_include_directories(${PROJECT_NAME} PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+  $<INSTALL_INTERFACE:include>  # <prefix>/include/mylib
+)
 
 # Include header files for Visual Studio.
 source_group("Header Files" REGULAR_EXPRESSION .*\\.h\$)
