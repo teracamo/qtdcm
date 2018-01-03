@@ -39,26 +39,26 @@ class QTDCM_EXPORT QtDcm : public QWidget, public Ui::QtDcmWidget
 
 public:
     enum eMode {
-        CD_MODE = 0, 
+        CD_MODE = 0,
         PACS_MODE
     };
-    
+
     enum eGender {
         ALL_GENDER = 0,
         M_GENDER,
         F_GENDER
     };
-    
+
     enum eModalities {
         ALL_MODALITIES = 0,
         MR_MODALITY,
         CT_MODALITY,
         PET_MODALITY
     };
-    
+
     explicit QtDcm ( QWidget *parent = 0 ); /** constructor */
     virtual ~QtDcm();
-    
+
     /**
      * Get the pointer of the treewidget
      *
@@ -69,27 +69,27 @@ public:
     QTreeView *studiesTreeView() {return treeWidgetStudies;}
 
     QTreeView *seriesTreeView() {return treeWidgetSeries;}
-    
+
     /**
      * @brief Updates the PACS list in combo box
      */
     void updatePacsComboBox();
-    
+
     /**
      * @brief Opens the PACS preferences dialog
      */
     void editPreferences();
-    
+
     /**
      * @brief Opens the dicomdir selectiondialog
      */
     void openDicomdir();
 
-    
+
 signals:
     void serieChecked ( bool checked );
     void serieSelected ( bool selected );
-    
+
 protected slots:
     void onPacsSearchButtonClicked();
 
@@ -124,7 +124,7 @@ protected:
     void queryPACS();
     void clearDisplay();
     void initConnections();
-    
+
 private:
     QtDcmPrivate *d;
 };
